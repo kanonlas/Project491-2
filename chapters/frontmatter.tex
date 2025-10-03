@@ -5,16 +5,16 @@
 \begin{abstractTH}
 
 โครงงานนี้จัดทำขึ้นเพื่อนำเสนอการประยุกต์ใช้ทฤษฎีเกมและการคำนวณเชิงควอนตัม โดยนำไปแก้ไขปัญหาด้านความมั่นคงปลอดภัยไซเบอร์ ซึ่งมองจากสองมุมมองหลัก อันได้แก่ ฝ่ายป้องกันและฝ่ายโจมตี ภายใต้บริบทของทฤษฎีเกม โดยสมมติให้ผู้เล่นทั้งสองฝ่ายประกอบไปด้วย ผู้ป้องกัน และ ผู้โจมตี 
+
 โครงงานนี้ได้พัฒนารูปแบบของระบบความมั่นคงปลอดภัยไซเบอร์แบบหลายชั้น ผ่านรูปแบบโครงสร้างต้นไม้ (tree) จากทฤษฎีกราฟ ซึ่งโหนดแต่ละจุดจะแทนรางวัลหรือข้อมูลที่ผู้โจมตีจะได้รับหลังจากเลือกโหนดนั้น เเละผู้ป้องกันต้องปกป้องเเต่ละโหนดโดยการลดจำนวนรางวัลที่ผู้โจมตีจะได้รับ และเส้นเชื่อม (edge) จะแทนต้นทุนที่ใช้ในการโจมตีเพื่อเข้าถึงรางวัลนั้น ๆ หลังจากนั้นจะทำการศึกษาและวิเคราะห์ปัญหาต่าง ๆ บนแบบจำลองดังกล่าว พร้อมทั้งประยุกต์ใช้แนวคิด ดุลยภาพแนช (Nash Equilibrium) และประมวลผลของผลลัพธ์ด้วยกระบวนการ ควอนตัมแอนนีลลิง (Quantum Annealing) เพื่อหาคำตอบที่เหมาะสมที่สุดสำหรับปัญหาในแบบจำลอง
 \LaTeX{} เพื่อช่วยให้นักศึกษาเขียนรายงานได้อย่างสะดวกและรวดเร็วมากยิ่งขึ้น
 \end{abstractTH}
 
 \begin{abstract}
-The abstract would be placed here. It usually does not exceed 350 words
-long (not counting the heading), and must not take up more than one (1) page
-(even if fewer than 350 words long).
+This project is conducted to present the application of game theory and quantum computation to address cybersecurity issues from two main perspectives: the defender and the attacker, within the framework of game theory. The model assumes two players, namely the defender and the attacker.
 
-Make sure your abstract sits inside the \texttt{abstract} environment.
+The project develops a multi-layered cybersecurity system represented through a tree structure based on graph theory. Each node represents a reward or information that the attacker may obtain upon selecting that node, while the defender’s role is to protect each node by reducing the rewards accessible to the attacker. The edges represent the costs incurred by the attacker to reach the corresponding rewards. Subsequently, the project investigates and analyzes problems within this model, applying the concept of Nash Equilibrium and leveraging Quantum Annealing to process the results. This approach aims to determine the optimal solution for the modeled problem.
+
 \end{abstract}
 
 \iffalse
