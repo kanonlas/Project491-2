@@ -1,113 +1,71 @@
 \chapter{\ifenglish Background Knowledge and Theory\else ทฤษฎีที่เกี่ยวข้อง\fi}
 
-การทำโครงงาน เริ่มต้นด้วยการศึกษาค้นคว้า ทฤษฎีที่เกี่ยวข้อง หรือ งานวิจัย/โครงงาน ที่เคยมีผู้นำเสนอไว้แล้ว ซึ่งเนื้อหาในบทนี้ก็จะเกี่ยวกับการอธิบายถึงสิ่งที่เกี่ยวข้องกับโครงงาน เพื่อให้ผู้อ่านเข้าใจเนื้อหาในบทถัดๆ ไปได้ง่ายขึ้น
+\section{อัลกอริทึม (Algorithm)}
+อัลกอริทึม (Algorithm) คือชุดขั้นตอนหรือลำดับคำสั่งที่ใช้แก้ปัญหาหรือดำเนินการในคอมพิวเตอร์หรือระบบต่างๆ โดยมีขั้นตอนที่ชัดเจนและเป็นระบบ เพื่อให้ได้ผลลัพธ์ที่ถูกต้องตามที่ต้องการ อัลกอริทึมคือกระบวนการแก้ปัญหาที่สามารถอธิบายเป็นขั้นตอนอย่างละเอียด เมื่อได้รับข้อมูลนำเข้า จะต้องให้ผลลัพธ์ที่ถูกต้องและมีประสิทธิภาพ อัลกอริทึมที่ดีจะต้องมีความชัดเจนไม่คลุมเครือ ซึ่งการแก้ปัญหาโดยใช้อัลกอริทึมตรงข้ามกับการแก้ปัญหาโดยใช้สามัญสํานึก
 
-\section{The first section}
-The text for Section 1 goes here.
+\section{Cybersecurity Model}
+Cybersecurity Model คือแบบจำลองเพื่อวิเคราะห์และจำลองปฏิสัมพันธ์ระหว่างผู้โจมตี (attacker) และผู้ป้องกัน (defender) ในโลกไซเบอร์ โดยทั่วไปจะมีการใช้เกมสองผู้เล่นที่เป็น zero-sum game ซึ่งผู้โจมตีพยายามหาช่องโหว่เพื่อโจมตี ส่วนผู้ป้องกันพยายามลดความเสียหายและป้องกันระบบ โดยผู้เล่นทั้งสองฝ่ายสามารถเลือกกลยุทธ์หลายระดับ เช่น ระดับไม่โจมตีหรือไม่ป้องกัน, ระดับโจมตี/ป้องกันต่ำ, และระดับโจมตี/ป้องกันสูง
 
-\section{Second section}
-Section 2 text.
+\section{Graph Theory}
+ทฤษฎีกราฟ (Graph Theory) คือสาขาหนึ่งของคณิตศาสตร์และวิทยาการคอมพิวเตอร์ที่ศึกษาถึงคุณสมบัติและการใช้งานของกราฟ ซึ่งเป็นโครงสร้างข้อมูลที่ประกอบด้วยจุดยอด (Vertices) และเส้นเชื่อม (Edges) ที่เชื่อมต่อระหว่างจุดยอดเหล่านั้น กราฟเป็นแบบจำลองทางคณิตศาสตร์ที่ใช้แทนความสัมพันธ์หรือโครงสร้างของเครือข่ายต่างๆ
 
-\subsection{Subsection heading goes here}
+\subsection{Tree Structure}
+โครงสร้างต้นไม้ (Tree structure) ในทฤษฎีกราฟ หมายถึงกราฟที่ไม่มีวงจร (acyclic) และเป็นกราฟที่เชื่อมต่อกันทั้งหมด (connected) โดยลักษณะสำคัญของต้นไม้คือ ในกราฟต้นไม้จะมีเส้นเชื่อม (edges) เท่ากับจำนวนจุดเชื่อม (vertices) ลบหนึ่ง 
+\[
+|E| = |V| - 1
+\]
+มีเส้นทางเชื่อมโยงเดียวและไม่ซ้ำกันระหว่างจุดเชื่อมใดๆ สองจุด ต้นไม้ไม่มีวงจรใดๆ หากตัดเส้นเชื่อมใดเส้นหนึ่งออก จะทำให้กราฟไม่เชื่อมต่อ (แตกออกเป็นส่วนย่อย)  
 
-Subsection 1 text
+ต้นไม้ถือเป็นกราฟสองกลุ่ม (bipartite graph) และกราฟแผนที่ (planar graph) จุดที่มีเส้นเชื่อมแค่หนึ่งเส้น เรียกว่าใบไม้ (leaf หรือ terminal vertex) มีจุดศูนย์กลาง (center) หรือจุดสมดุล (centroid) ที่แบ่งต้นไม้ได้อย่างสมดุล  
 
-\subsubsection{Subsubsection 1 heading goes here}
-Subsubsection 1 text
+โดยทั่วไป นิยามของต้นไม้คือกราฟที่เชื่อมต่อกันและไม่มีวงจร ซึ่งถือเป็นโครงสร้างพื้นฐานในหลายด้าน เช่น โครงสร้างข้อมูล คอมพิวเตอร์ เครือข่าย และระบบไฟฟ้า เป็นต้น
 
-\subsubsection{Subsubsection 2 heading goes here}
-Subsubsection 2 text
+\section{Game Theory}
+Game Theory คือศาสตร์ที่ศึกษาแบบจำลองทางคณิตศาสตร์ของสถานการณ์ที่มีการโต้ตอบเชิงกลยุทธ์ระหว่างผู้เล่นหลายฝ่าย ซึ่งมักใช้วิเคราะห์การตัดสินใจของผู้เล่นที่มีเหตุผลในสถานการณ์แข่งขันหรือร่วมมือกัน โดยตั้งสมมติฐานว่าผู้เล่นแต่ละคนจะพยายามเพิ่มผลประโยชน์ของตนเองจากกลยุทธ์ที่เลือกใช้ โดยในหนึ่งเกม จะประกอบไปด้วย
 
-\section{Third section}
-Section 3 text. The dielectric constant\index{dielectric constant}
-at the air-metal interface determines
-the resonance shift\index{resonance shift} as absorption or capture occurs
-is shown in Equation~\eqref{eq:dielectric}:
+\begin{enumerate}
+  \item ผู้เล่น (Players) คือผู้มีส่วนร่วมในการตัดสินใจ
+  \item กลยุทธ์ (Strategies) คือทางเลือกที่ผู้เล่นสามารถเลือกใช้ได้
+  \item ผลตอบแทน (Payoffs) คือผลลัพธ์หรือรางวัลที่ผู้เล่นได้รับจากการเลือกกลยุทธ์
+  \item กติกาของเกม (Rules of the game) คือเงื่อนไขที่กำหนดว่าผู้เล่นโต้ตอบกันอย่างไร
+\end{enumerate}
 
-\begin{equation}\label{eq:dielectric}
-k_1=\frac{\omega}{c({1/\varepsilon_m + 1/\varepsilon_i})^{1/2}}=k_2=\frac{\omega
-\sin(\theta)\varepsilon_\mathit{air}^{1/2}}{c}
-\end{equation}
+\subsection{เกมเชิงกลยุทธ์ (Strategic Game)}
+เกมเชิงกลยุทธ์ (Strategic Game) สามารถนิยามได้เป็นพจน์
+\[
+G = (N, S, u)
+\]
+โดยที่
+\begin{enumerate}
+  \item \( N = \{1, 2, \ldots, n\} \) คือเซตของผู้เล่น
+  \item \( S = S_1 \times S_2 \times \cdots \times S_n \) คือเซตของกลยุทธ์
+  \item \( u = (u_1, u_2, \ldots, u_n) \) คือฟังก์ชันผลตอบแทนของผู้เล่นแต่ละคน
+\end{enumerate}
 
-\noindent
-where $\omega$ is the frequency of the plasmon, $c$ is the speed of
-light, $\varepsilon_m$ is the dielectric constant of the metal,
-$\varepsilon_i$ is the dielectric constant of neighboring insulator,
-and $\varepsilon_\mathit{air}$ is the dielectric constant of air.
+\subsection{Nash Equilibrium}
+Nash Equilibrium คือสภาวะที่ไม่มีผู้เล่นคนใดสามารถได้ผลประโยชน์มากขึ้นโดยการเปลี่ยนกลยุทธ์ของตนเอง หากผู้เล่นคนอื่นยังคงกลยุทธ์เดิมอยู่
 
-\section{About using figures in your report}
+\section{Quantum Mechanics}
+\subsection{Superposition}
+หลักการที่ระบบควอนตัมสามารถอยู่ในหลายสถานะได้พร้อมกัน จนกว่าจะมีการวัดหรือสังเกต
 
-% define a command that produces some filler text, the lorem ipsum.
-\newcommand{\loremipsum}{
-  \textit{Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-  minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-  aliquip ex ea commodo consequat. Duis aute irure dolor in
-  reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-  pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-  culpa qui officia deserunt mollit anim id est laborum.}\par}
+\subsection{Entanglement}
+ปรากฏการณ์ที่อนุภาคควอนตัมถูกเชื่อมโยงกัน ทำให้การวัดอนุภาคหนึ่งส่งผลต่ออีกอนุภาคหนึ่งทันที
 
-\begin{figure}
-  \centering
+\subsection{Tunneling}
+ปรากฏการณ์ที่อนุภาคสามารถผ่านอุปสรรคพลังงานได้ แม้พลังงานจะต่ำกว่าความสูงของกำแพง
 
-  \fbox{
-     \parbox{.6\textwidth}{\loremipsum}
-  }
+\subsection{Quantum Computing}
+เครื่องคอมพิวเตอร์ที่ใช้หลักการควอนตัมในการคำนวณ เช่น Gate-based Quantum Computing และ Quantum Annealing
 
-  % To include an image in the figure, say myimage.pdf, you could use
-  % the following code. Look up the documentation for the package
-  % graphicx for more information.
-  % \includegraphics[width=\textwidth]{myimage}
+\subsection{Quantum Annealing}
+กระบวนการคำนวณเชิงควอนตัมเพื่อหาค่าที่เหมาะสมที่สุด โดยใช้ Superposition และ Quantum Tunneling
 
-  \caption[Sample figure]{This figure is a sample containing \gls{lorem ipsum},
-  showing you how you can include figures and glossary in your report.
-  You can specify a shorter caption that will appear in the List of Figures.}
-  \label{fig:sample-figure}
-\end{figure}
+\subsection{QUBO Formulation}
+การกำหนดปัญหาให้อยู่ในรูปแบบ Quadratic Unconstrained Binary Optimization ซึ่งเป็นปัญหา NP-hard
 
-Using \verb.\label. and \verb.\ref. commands allows us to refer to
-figures easily. If we can refer to Figures
-\ref{fig:walrus} and \ref{fig:sample-figure} by name in the {\LaTeX}
-source code, then we will not need to update the code that refers to it
-even if the placement or ordering of the figures changes.
-
-\loremipsum\loremipsum
-
-% This code demonstrates how to get a landscape table or figure. It
-% uses the package lscape to turn everything but the page number into
-% landscape orientation. Everything should be included within an
-% \afterpage{ .... } to avoid causing a page break too early.
-\afterpage{
-  \begin{landscape}
-  \begin{table}
-    \caption{Sample landscape table}
-    \label{tab:sample-table}
-
-    \centering
-
-    \begin{tabular}{c||c|c}
-        Year & A & B \\
-        \hline\hline
-        1989 & 12 & 23 \\
-        1990 & 4 & 9 \\
-        1991 & 3 & 6 \\
-    \end{tabular}
-  \end{table}
-  \end{landscape}
-}
-
-\loremipsum\loremipsum\loremipsum
-
-\section{Overfull hbox}
-
-When the \verb.semifinal. option is passed to the \verb.cpecmu. document class,
-any line that is longer than the line width, i.e., an overfull hbox, will be
-highlighted with a black solid rule:
-\begin{center}
-\begin{minipage}{2em}
-juxtaposition
-\end{minipage}
-\end{center}
+\subsection{Optimization Problems}
+ปัญหาที่ต้องการหาคำตอบที่ดีที่สุดจากฟังก์ชันวัตถุประสงค์ โดยอาจมีหรือไม่มีข้อจำกัด
 
 \section{\ifenglish%
 \ifcpe CPE \else ISNE \fi knowledge used, applied, or integrated in this project
@@ -116,7 +74,13 @@ juxtaposition
 \fi
 }
 
-อธิบายถึงความรู้ และแนวทางการนำความรู้ต่างๆ ที่ได้เรียนตามหลักสูตร ซึ่งถูกนำมาใช้ในโครงงาน
+\subsection{Algorithms for Computer Engineers} นํามาใช้ในการพัฒนาอัลกอริทึมในแบบจำลองควอนตัม
+\subsection{Data Structures for Computer Engineers} นํามาใช้ในการออกแบบโครงสร้างแผนภาพต้นไม้ของปัญหา
+\subsection{Discrete Math for Computer Engineers} นํามาใช้ในการพิสูจน์ทางตรรกศาสตร์ ตารางค่าความจริงในสมการ
+\subsection{Advance Algorithm} นํามาใช้เป็นแนวทางการออกแบบ และวิเคราะห์อัลกอริทึมที่ให้ผลลัพธ์ที่เหมาะสมที่สุดสำหรับปัญหาทางไซเบอร์
+\subsection{Quantum Computing} นำมาใช้เป็นกระบวนการหลักในการสร้างอัลกอริทึมในการคำนวณเชิงควอนตัม
+\subsection{Penetration Testing} นำมาใช้ในการจำแนกประเภทของวิธีการโจมตีระบบความปลอดภัย
+\subsection{Defensive Security} นำมาใช้ในการจำแนกประเภทของวิธีการป้องกันระบบความปลอดภัย
 
 \section{\ifenglish%
 Extracurricular knowledge used, applied, or integrated in this project
@@ -124,5 +88,7 @@ Extracurricular knowledge used, applied, or integrated in this project
 ความรู้นอกหลักสูตรซึ่งถูกนำมาใช้หรือบูรณาการในโครงงาน
 \fi
 }
-
-อธิบายถึงความรู้ต่างๆ ที่เรียนรู้ด้วยตนเอง และแนวทางการนำความรู้เหล่านั้นมาใช้ในโครงงาน
+\subsection{Game Theory (ทฤษฎีเกม)} ใช้เป็นทฤษฎีหลักในการประยุกต์กับปัญหาระบบความปลอดภัย
+\subsection{Nash Equilibrium (ดุลยภาพแนช)} ใช้เพื่อวิเคราะห์ผลลัพธ์ที่ดีที่สุดของอัลกอริทึม
+\subsection{Prisoner’s Dilemma (ปัญหานักโทษ)} ใช้ในการสร้างตัวต้นแบบก่อนพัฒนาอัลกอริทึมจริง
+\subsection{Layered Security} ใช้อธิบายมาตรการป้องกันระบบความมั่นคงปลอดภัยไซเบอร์
