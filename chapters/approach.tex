@@ -74,6 +74,7 @@ H_{nash} = (W \cdot \mathbb{I}[R_D > 0] + W \cdot \mathbb{I}[R_A > 0]) x_i y_j
 % --- N player ---
 \section{โมเดลจำลองจริงสำหรับผู้เล่น N คน (General N-Player Model)}
 งานวิจัยได้ขยายขอบเขตสู่กรณีผู้เล่น $N$ คน เพื่อรองรับสถานการณ์ที่มีผู้โจมตีหลายราย (Multi-attackers) โดยมีขั้นตอนดังนี้
+% --- 3.2.2 อธิบายตาราง payoff  เเละกลยุทธ์ ---
 \subsection{การสร้างโครงสร้างต้นไม้ลําดับชั้น (Hierarchical Tree Structure Construction)}
 ผู้วิจัยประยุกต์ใช้ทฤษฎีกราฟ (Graph Theory) ในการจำลองสถาปัตยกรรมของระบบรักษาความปลอดภัยแบบหลายชั้น (Defense in Depth)  โดยมีรายละเอียดดังนี้:
 \begin{itemize}
@@ -82,6 +83,91 @@ H_{nash} = (W \cdot \mathbb{I}[R_D > 0] + W \cdot \mathbb{I}[R_A > 0]) x_i y_j
 \item \textbf{โครงสร้างลําดับชั้น:} กำหนดให้มีโหนดราก (Root) เป็นจุดเริ่มต้น และกระจายไปยังโหนดใบ (Leaves) ซึ่งเป็นสินทรัพย์ชั้นในสุด 
 \end{itemize}
 
+% เพิ่มรูปต้นไม้
+% --- ส่วนของรูปภาพต้นไม้  --
+%  ยังไม่ได้จัดรูปต้นไม้ให้สวยงาม ถ้าอยากจัดก็ได้จ้า
+
+\begin{figure}[htbp]
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tikzpicture}[
+  every node/.style={
+    draw,
+    circle,
+    minimum size=2.2cm,
+    align=center,
+    font=\small,
+    fill=white,
+    line width=0.8pt
+  },
+  edge label/.style={
+    draw=none,
+    fill=none,
+    font=\footnotesize,
+    midway,
+    inner sep=2pt
+  },
+  >=stealth % หัวลูกศรแบบมาตรฐาน
+]
+
+% ROOT
+\node (root) at (0,0) {\textbf{ROOT}\\P=0};
+
+% -------- LEVEL 1 (ซ้าย) --------
+\node (userflow) at (-6,1) {User Flow\\P=15};
+\node (dr) at (-3,4) {Disaster\\Recovery\\P=10};
+\node (cloud) at (-7,-2) {Public Cloud\\P=5};
+\node (logistics) at (-5,-5) {Third-party\\P=4};
+\node (workstation) at (-1.5,-4.5) {Workstations\\P=6};
+
+% -------- LEVEL 2 (ซ้าย) --------
+\node (doctor) at (-9,3) {Doctor\\P=6};
+\node (prescription) at (-10,0) {Prescriptions\\P=5};
+
+% -------- LEVEL 1 (ขวา) --------
+\node (payment) at (0,5.5) {Payment Info\\P=15};
+\node (customerdb) at (4,3.5) {Customer DB\\P=25};
+\node (core) at (6,0.5) {Core Platform\\P=15};
+\node (security) at (6,-2.5) {Security\\P=15};
+\node (erp) at (4,-5) {ERP/CRM\\P=9};
+\node (datacenter) at (1.5,-7) {Data Center\\P=10};
+\node (network) at (-1,-8.5) {Network\\P=9};
+
+% -------- LEVEL 2 (ขวา) --------
+\node (health) at (8,4.5) {Patient Data\\P=25};
+\node (schedule) at (9.5,1.5) {Scheduling\\P=12};
+\node (vdo) at (9.5,-1) {VDO Call\\P=9};
+
+% -------- EDGES (การเชื่อมต่อ) --------
+\draw[->] (root) -- node[above, edge label]{C=11} (userflow);
+\draw[->] (userflow) -- node[above, edge label]{C=4} (doctor);
+\draw[->] (userflow) -- node[below, edge label]{C=3} (prescription);
+
+\draw[->] (root) -- node[above, edge label, pos=0.6]{C=7} (dr);
+\draw[->] (root) -- node[above, edge label]{C=2} (cloud);
+\draw[->] (root) -- node[left, edge label]{C=1} (logistics);
+\draw[->] (root) -- node[right, edge label]{C=5} (workstation);
+
+\draw[->] (root) -- node[right, edge label]{C=15} (payment);
+\draw[->] (root) -- node[above, edge label]{C=23} (customerdb);
+\draw[->] (customerdb) -- node[above, edge label]{C=23} (health);
+
+\draw[->] (root) -- node[above, edge label]{C=13} (core);
+\draw[->] (core) -- node[above, edge label]{C=9} (schedule);
+\draw[->] (core) -- node[below, edge label]{C=5} (vdo);
+
+\draw[->] (root) -- node[right, edge label]{C=12} (security);
+\draw[->] (root) -- node[right, edge label]{C=6} (erp);
+\draw[->] (root) -- node[right, edge label]{C=7} (datacenter);
+\draw[->] (root) -- node[right, edge label]{C=7} (network);
+
+\end{tikzpicture}
+}
+\caption{Cybersecurity Attack Tree Model สำหรับกรณีศึกษาบริษัท Aid-gent}
+\label{fig:tree}
+\end{figure}
+
+%  --- 3.2.2 แปลงข้อมูลเป็นตารางผลตอบแทน ---
 \subsection{การคำนวณและแปลงข้อมูลเป็นตารางผลตอบแทน (Payoff Table Generation)}
 หลังจากสร้างโครงสร้างต้นไม้แล้ว ผู้วิจัยจะใช้กลยุทธ์การสำรวจกราฟเพื่อคำนวณหาค่าผลตอบแทน (Payoff) ที่แต่ละฝ่ายจะได้รับในสถานการณ์ต่าง ๆ:
 \begin{itemize}
@@ -90,6 +176,48 @@ H_{nash} = (W \cdot \mathbb{I}[R_D > 0] + W \cdot \mathbb{I}[R_A > 0]) x_i y_j
 \item \textbf{การบันทึกค่าผลตอบแทน:} ระบบจะประมวลผลการบุกรุกตามลำดับ (Turn-based) และนำมูลค่าของโหนดที่ถูกโจมตีได้สำเร็จมาคำนวณเป็นค่า Payoff ของผู้โจมตี ส่วนมูลค่าสินทรัพย์ที่เหลือรอดจะเป็น Payoff ของผู้ป้องกัน โดยข้อมูลทั้งหมดจะถูกจัดเก็บในรูปแบบตาราง (Payoff Matrix) เพื่อใช้เป็นข้อมูลนำเข้าสำหรับแบบจำลอง QUBO ต่อไป
 \end{itemize}
 
+% เพิ่มรูปตารางที่ได้หลังจากทำแผนภาพต้นไม้
+เมื่อนำค่าจากต้นไม้ที่คำนวณสำหรับการทดสอบกับระบบผู้ป้องกันที่ใช้กลยุทธ์ ASC (น้อยไปมาก) และผู้โจมตีที่ใช้กลยุทธ์ BFS (แนวกว้าง) ภายใต้งบประมาณที่จำกัด จะได้ตารางผลตอบแทน (Payoff Table) ดังนี้
+
+% --- ตารางที่ 1: ASC ---
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{A1 \textbackslash \ A2} & \textbf{BFS} & \textbf{DFS} \\ \hline
+\textbf{BFS} & (98, 54, 43) & \textbf{(99, 71, 25)} \\ \hline
+\textbf{DFS} & (86, 54, 55) & (98, 60, 37) \\ \hline
+\end{tabular}
+\caption{Payoff Matrix สำหรับกลยุทธ์ผู้ป้องกันแบบ ASC}
+\end{table}
+
+% --- ตารางที่ 2: DSC ---
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{A1 \textbackslash \ A2} & \textbf{BFS} & \textbf{DFS} \\ \hline
+\textbf{BFS} & (125, 59, 11) & (129, 61, 5) \\ \hline
+\textbf{DFS} & (126, 45, 24) & (122, 49, 24) \\ \hline
+\end{tabular}
+\caption{Payoff Matrix สำหรับกลยุทธ์ผู้ป้องกันแบบ DSC}
+\end{table}
+
+% --- ตารางที่ 3: Random ---
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{A1 \textbackslash \ A2} & \textbf{BFS} & \textbf{DFS} \\ \hline
+\textbf{BFS} & (128, 61, 6) & (134, 50, 11) \\ \hline
+\textbf{DFS} & (130, 55, 10) & (127, 58, 10) \\ \hline
+\end{tabular}
+\caption{Payoff Matrix สำหรับกลยุทธ์ผู้ป้องกันแบบ Random}
+\end{table}
+
+
+
+%  --- 3.2.3 อธิบาย player เเละบังคับ activate ---
 \subsection{การกำหนดตัวแปรและเงื่อนไขบังคับ (Variables and Constraints)}
 กำหนดให้ $s_j^i$ เป็นตัวแปรไบนารี (Binary Variable) แทนการตัดสินใจของผู้เล่น $i$ ($p_i$) ในการเลือกกลยุทธ์ $j$:
 \begin{equation}
@@ -105,12 +233,15 @@ s_j^i =
 \end{equation}
 โดยที่ $m^i$ คือจำนวนกลยุทธ์ทั้งหมดของผู้เล่น $i$ 
 
+% --- 3.2.4 เพิ่ม slack เข้าไปในสมการ ---
 \subsection{การแปลงอสมการดุลยภาพแนชและตัวแปรเสริม (Nash Inequality and Slack Variables)}
 เงื่อนไขของดุลยภาพแนชระบุว่า สถานะใด ๆ จะเป็นจุดสมดุลต่อเมื่อไม่มีผู้เล่นคนใดสามารถได้รับผลตอบแทนที่ดีขึ้นจากการเปลี่ยนกลยุทธ์เพียงฝ่ายเดียว ซึ่งเขียนในรูปอสมการเปรียบเทียบผลตอบแทนปัจจุบัน ($v_j^i$) กับผลตอบแทนทางเลือก ($v_k^i$) ได้เป็น $v_j^i - v_k^i \geq 1$ เพื่อให้สามารถประมวลผลบนเครื่องคอมพิวเตอร์ควอนตัมได้ อสมการดังกล่าวจะถูกเปลี่ยนเป็นสมการโดยการนำตัวแปรเสริม (Slack Variable: $S$) เข้ามาช่วย ซึ่งสมการจะมีค่าเป็นศูนย์ได้เฉพาะเมื่ออสมการเดิมเป็นจริงเท่านั้น:
 \begin{equation}
 (v_j^i s_j^i - v_k^i s_k^i - 1 - S)^2 = 0 
 \end{equation}
 โดยที่ $S$ จะต้องมีค่าเป็นบวกเสมอ ($S \geq 0$) เพื่อให้สอดคล้องกับเงื่อนไขดุลยภาพ 
+
+% --- 3.2.5 ทำให้เป็น binary เพื่อให้เข้า Quantum annealing ---
 \subsection{การเข้ารหัสตัวแปรเสริมด้วยระบบเลขฐานสอง (Binary Expansion)}
 เนื่องจากระบบคอมพิวเตอร์ควอนตัมแอนนีลลิงทำงานบนพื้นฐานของคิวบิต ตัวแปรเสริม $S$ จึงต้องได้รับการเข้ารหัสผ่านการขยายเชิงเลขฐานสอง (Binary Expansion) เพื่อแทนค่าจำนวนเต็มของส่วนต่างผลตอบแทน:
 \begin{equation}
@@ -118,20 +249,25 @@ S = \sum_{n=0}^{N-1} 2^n q_n
 \end{equation}
 ในโครงงานนี้มีการกำหนดค่า $N=5$ ซึ่งช่วยให้แบบจำลองสามารถรองรับส่วนต่างของค่าผลตอบแทนได้สูงสุดถึง 31 ($2^5-1$) เพื่อความครอบคลุมในการวิเคราะห์กรณีศึกษาที่หลากหลาย 
 
+% --- 3.2.6 สมการรวมอันสุดท้าย ---
 \subsection{ฟังก์ชันพลังงานรวมของแบบจำลอง (Total QUBO Formulation)}
-ฟังก์ชันพลังงานรวมสำหรับตรวจสอบความเป็นดุลยภาพแนชของผู้เล่น $i$ ($\phi_i$) คือการรวบรวมเงื่อนไขการเลือกกลยุทธ์และอสมการเปรียบเทียบผลตอบแทนเข้าด้วยกัน:
+ฟังก์ชันพลังงานรวมสำหรับตรวจสอบความเป็นดุลยภาพแนชของผู้เล่น $i$ ($\phi_i$) คือการรวบรวมเงื่อนไขการเลือกกลยุทธ์และอสมการเปรียบเทียบผลตอบแทนเข้าด้วยกัน
+
+% เขียนยังไม่ครบแก้ด้วย
 \begin{equation}
 \phi_i = \left( \sum_{j=1}^{m^i} s_j^i - 1 \right)^2 + \sum_{k \neq j} (v_j^i s_j^i - v_k^i s_k^i - 1 - S_k)^2 
 \end{equation}
 
+% --- เพิ่มรูป QUBO ---
 \begin{center}
   \includegraphics[width=1.5in]{QUBOform.png}
 \end{center}
 
-
 หากการประมวลผลผ่าน Quantum Annealer ให้ค่าพลังงานต่ำสุดเท่ากับ $0.0$ จะสรุปได้ว่าสถานะกลยุทธ์ (Strategy Profile) นั้นคือจุดดุลยภาพแนชของระบบ
+% --- 3.2.7 แสดงผลลัพธ์หลัง run code ---
 \subsection{กรณีศึกษาและการประมวลผล (3-Player Game Example)}
 เมื่อนำค่าจากต้นไม้ที่คำนวณสำหรับการทดสอบกับระบบผู้ป้องกัน 1 ราย และผู้โจมตี 2 ราย โดยให้ผู้โจมตี ดำเนินการเป็นลำดับ (turn-based attack) โดยมีงบประมาณที่ต่างกัน (A1=100, A2=50) พบว่าจากการประมวลผลด้วย \texttt{dimod.ExactSolver()} พบว่าสถานะที่ค่าพลังงานรวมเป็น $0.0$ คือจุดสมดุลแนช คือ สถานะที่ \texttt{('BFS', 'DFS', 'ASC')} ที่มีผลตอบแทนรวมเท่ากับ $(99, 71, 25)$
 
+% --- 3.2.8 ผลลัพธ์ผสมหลังจากคำนวนคณิตศาสตร์ กับ ควอนตัม ---
 \subsection{อัลกอริทึมแบบผสมผสาน (Hybrid Quantum-Classical Approach)}
 เนื่องจากข้อจำกัดด้านคิวบิต ผู้วิจัยจึงใช้แนวทาง Hybrid โดยให้คอมพิวเตอร์ดั้งเดิม (Classical) ทำหน้าที่วนลูปตรวจสอบสถานะกลยุทธ์ (Strategy Profile) และส่งเฉพาะ QUBO ของแต่ละสถานะไปให้ Quantum Annealer ประมวลผลเพื่อยืนยันความเป็นแนช ซึ่งช่วยประหยัดทรัพยากรและรองรับปัญหาที่ใหญ่ขึ้นได้จริง
