@@ -39,15 +39,27 @@
 \section{ขั้นตอนการใช้งานระบบ (Operating Procedures)}
 \begin{enumerate}
     \item \textbf{การติดตั้งไลบรารีหลัก:} ดำเนินการติดตั้งผ่านคำสั่ง pip ใน Terminal หรือ Code Cell
+    % ---โค้ด ---
     \begin{lstlisting}[language=Python]
     !pip install dimod pyqubo dwave-neal
     \end{lstlisting}
+    % ---แปะรูปโค้ดการติดตั้งไลบรารี ---
+    \begin{center}
+    \includegraphics{pipCodeCell.png}
+    \end{center}
+
+
     \item \textbf{หน้าที่ของไลบรารี:}
     \begin{itemize}
         \item \textbf{dimod:} สำหรับการจัดการโครงสร้างปัญหาในรูปแบบ Binary Quadratic Model (BQM)
         \item \textbf{pyqubo:} สำหรับการสร้างตัวแปร Binary และการแปลงสมการทางคณิตศาสตร์ให้อยู่ในรูปแบบ QUBO
         \item \textbf{neal:} สำหรับการประมวลผลผ่านอัลกอริทึม Simulated Annealing Sampler
     \end{itemize}
+
+    % ---แปะรูปโค้ดไลบรารี ---
+    \begin{center}
+    \includegraphics{libraryCode.png}
+    \end{center}
 \end{enumerate}
 
 % --- ข.3 ---
@@ -64,19 +76,57 @@ tables = {
 }
 \end{lstlisting}
 โดยที่ค่าใน Tuple หมายถึงผลตอบแทนของผู้โจมตีรายที่ 1, ผู้โจมตีรายที่ 2 และผู้ป้องกัน ตามลำดับ
+    % ---แปะรูปโค้ดตาราง table ---
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{TableCode.png}
+    \caption{การกำหนดตารางผลตอบแทนและกลยุทธ์ในรูปแบบ Python Dictionary}
+    % \label{fig:table_code}
+\end{figure}
+
 % --- ข.4 ---
 \section{กระบวนการประมวลผลหลัก (Core Processing)}
 การทำงานของระบบจะแบ่งออกเป็นขั้นตอนสำคัญที่ผู้ใช้สามารถปรับแต่งค่าพารามิเตอร์ได้ ดังนี้
 
 \begin{enumerate}
     \item \textbf{การกำหนดขนาด Slack Variable:} ปรับค่า \texttt{num\_bits} เพื่อรองรับช่วงความต่างของผลตอบแทน (เช่น 5 บิต สำหรับส่วนต่างไม่เกิน 31 หรือ 7 บิต สำหรับส่วนต่างไม่เกิน 127)
+
+    % -- -แปะรูปโค้ด Slack Variable ---
+    \begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{ SlackCode.png}
+    \caption{การกำหนดขนาด Slack Variable}
+    % \label{fig:table_code}
+    \end{figure}
+
     \item \textbf{การสร้างสมการ QUBO:} ระบบจะใช้ฟังก์ชัน \texttt{create\_payoff\_qubo} เพื่อแปลงความสัมพันธ์ระหว่างผลตอบแทนปัจจุบันและผลตอบแทนทางเลือกให้อยู่ในรูปสมการกำลังสอง $(V_{current} - V_{alt} - 1 - Slack)^2$
+    
+    % QUBOcode.png
+    % -- -แปะรูปโค้ด Slack Variable ---
+    \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{QUBOcode.png}
+    \caption{การสร้างสมการ QUBO จากตารางผลตอบแทนและการกำหนด Slack Variable}
+    % \label{fig:table_code}
+    \end{figure}
+
     \item \textbf{การเลือก Solver:} 
     \begin{itemize}
         \item สำหรับปัญหาขนาดเล็ก: แนะนำให้ใช้ \texttt{dimod.ExactSolver()} เพื่อหาคำตอบที่แม่นยำที่สุด
         \item สำหรับปัญหาขนาดใหญ่: แนะนำให้ใช้ \texttt{neal.SimulatedAnnealingSampler()} เพื่อเพิ่มประสิทธิภาพในเชิงเวลา
     \end{itemize}
+    % SolverCode.png
+    % -- -แปะรูปโค้ด Solver ---
+    \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{SolverCode.png}
+    \caption{การเลือก Solver สำหรับการประมวลผล QUBO}
+    % \label{fig:table_code}
+    \end{figure}
 \end{enumerate}
+
+
+
 % --- ข.5 ---
 \section{การตีความผลลัพธ์ (Output Interpretation)}
 เมื่อระบบดำเนินการประมวลผลเสร็จสิ้น ผลลัพธ์จะถูกแสดงผลในรูปแบบตารางเปรียบเทียบค่าพลังงาน (Energy) ดังนี้
@@ -86,3 +136,12 @@ tables = {
     \item \textbf{ค่าพลังงาน (Energy):} หากค่าพลังงานมีค่ามากกว่า $0$ แสดงว่าโปรไฟล์นั้นไม่ใช่ดุลยภาพแนช โดยค่าพลังงานที่แสดงจะสะท้อนถึงระดับความเสียดาย (Regret) ของผู้เล่นในระบบ
     \item \textbf{สรุปผล (Summary):} ระบบจะแสดงจุดดุลยภาพแนชที่ดีที่สุดพร้อมค่าผลตอบแทนรวมในส่วนท้ายของการประมวลผล
 \end{itemize}
+
+% resultEx.png
+% ภาพตัวอย่างผลลัพธ์ 
+    \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{resultEx.png}
+    \caption{ภาพตัวอย่างผลลัพธ์การประมวลผลที่แสดงสถานะ NASH และค่าพลังงานของโปรไฟล์กลยุทธ์ต่าง ๆ}
+    % \label{fig:table_code}
+    \end{figure}
